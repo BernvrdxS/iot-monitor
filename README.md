@@ -67,7 +67,7 @@ O sistema classifica automaticamente cada leitura em três status:
 
 **1. Clone o repositório**
 ```bash
-git clone https://github.com/SEU_USUARIO/iot-monitor.git
+git clone https://github.com/BernvrdxS/iot-monitor
 cd iot-monitor
 ```
 
