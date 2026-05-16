@@ -86,40 +86,6 @@ docker compose up -d
 
 Abra o navegador em: [http://localhost:3000](http://localhost:3000)
 
-**5. Para parar os containers**
-```bash
-docker compose down
-```
-
-**Para parar E remover os dados (limpar tudo):**
-```bash
-docker compose down -v
-```
-
----
-
-## 🔧 Comandos Úteis
-
-```bash
-# Ver containers em execução
-docker ps
-
-# Ver logs da aplicação
-docker logs iot_app
-
-# Ver logs do banco
-docker logs iot_db
-
-# Ver volumes criados
-docker volume ls
-
-# Reconstruir a imagem após alterações
-docker compose up -d --build
-
-# Acessar o banco via psql (dentro do container)
-docker exec -it iot_db psql -U postgres -d iot_monitor
-```
-
 ---
 
 ## 🌐 Portas Utilizadas
@@ -138,8 +104,6 @@ docker exec -it iot_db psql -U postgres -d iot_monitor
 | Variável       | Padrão       | Descrição                     |
 |----------------|--------------|-------------------------------|
 | `DB_NAME`      | iot_monitor  | Nome do banco de dados        |
-| `DB_USER`      | postgres     | Usuário do PostgreSQL         |
-| `DB_PASSWORD`  | postgres     | Senha do PostgreSQL           |
 | `APP_PORT`     | 3000         | Porta externa da aplicação    |
 
 ---
@@ -155,48 +119,3 @@ O arquivo `docker-compose.yml` define:
 - **`depends_on` com `condition: service_healthy`**: a aplicação só sobe após o banco estar pronto
 
 ---
-
-## 🔗 DockerHub
-
-A imagem da aplicação está publicada em:
-
-```
-docker pull SEU_USUARIO/iot-monitor:latest
-```
-
----
-
-## 📁 Estrutura do Projeto
-
-```
-projeto/
-├── app/
-│   ├── src/
-│   │   ├── server.js          # API REST + servidor Express
-│   │   └── public/
-│   │       └── index.html     # Interface web (frontend)
-│   ├── package.json
-│   └── Dockerfile
-├── evidencias/                # Prints obrigatórios
-├── docker-compose.yml
-├── .env.example
-└── README.md
-```
-
----
-
-## 📡 Endpoints da API
-
-| Método | Rota                        | Descrição                  |
-|--------|-----------------------------|----------------------------|
-| GET    | /api/sensors                | Lista todos os sensores    |
-| GET    | /api/sensors/:id            | Busca sensor por ID        |
-| POST   | /api/sensors                | Cadastra novo sensor       |
-| PUT    | /api/sensors/:id            | Atualiza sensor            |
-| DELETE | /api/sensors/:id            | Remove sensor              |
-| GET    | /api/readings               | Lista todas as leituras    |
-| GET    | /api/sensors/:id/readings   | Leituras de um sensor      |
-| POST   | /api/readings               | Registra nova leitura      |
-| PUT    | /api/readings/:id           | Atualiza status de leitura |
-| DELETE | /api/readings/:id           | Remove leitura             |
-| GET    | /health                     | Verificação de saúde       |
