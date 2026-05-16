@@ -119,3 +119,10 @@ O arquivo `docker-compose.yml` define:
 - **`depends_on` com `condition: service_healthy`**: a aplicação só sobe após o banco estar pronto
 
 ---
+## 🐳 DockerHub
+
+A imagem da aplicação está publicada em:
+
+```
+docker pull bernardosantos777/iot-monitor:latest
+```
