@@ -1,3 +1,5 @@
+#!/bin/bash
+
 LOG_DIR="/app/iot/logs"
 LOG_FILE="$LOG_DIR/03_estrutura_$(date +%Y-%m-%d).log"
 BASE_DIR="/app/iot"

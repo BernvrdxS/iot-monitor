@@ -1,3 +1,5 @@
+#!/bin/bash
+
 ORIGEM="/app/source"
 DESTINO="/var/www/html"
 LOG_DIR="/app/iot/logs"

@@ -1,9 +1,7 @@
 FROM ubuntu:22.04
 
-# Evita prompts interativos durante apt install
 ENV DEBIAN_FRONTEND=noninteractive
 
-# Atualiza pacotes base e instala dependências essenciais
 RUN apt-get update && apt-get install -y \
     apache2 \
     curl \
@@ -12,6 +10,8 @@ RUN apt-get update && apt-get install -y \
     tar \
     gzip \
     bash \
+    nodejs \
+    npm \
     && apt-get clean \
     && rm -rf /var/lib/apt/lists/*
 

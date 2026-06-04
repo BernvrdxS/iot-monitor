@@ -1,0 +1,45 @@
+[2026-06-04 13:48:41] Limpando estruturas temporárias antigas...
+[2026-06-04 13:48:41] ====== CRIANDO ESTRUTURA DE DIRETÓRIOS - IoT Monitor ======
+[2026-06-04 13:48:41] [OK] Criado: /app/iot/sensores/temperatura
+[2026-06-04 13:48:41] [OK] Criado: /app/iot/sensores/umidade
+[2026-06-04 13:48:41] [OK] Criado: /app/iot/sensores/pressao
+[2026-06-04 13:48:41] [OK] Criado: /app/iot/sensores/co2
+[2026-06-04 13:48:41] [OK] Criado: /app/iot/coletas/historico
+[2026-06-04 13:48:41] [OK] Criado: /app/iot/coletas/tempo_real
+[2026-06-04 13:48:41] [OK] Criado: /app/iot/alertas/criticos
+[2026-06-04 13:48:41] [OK] Criado: /app/iot/alertas/avisos
+[2026-06-04 13:48:42] [OK] Criado: /app/iot/alertas/resolvidos
+[2026-06-04 13:48:42] [OK] Criado: /app/iot/logs/sistema
+[2026-06-04 13:48:42] [OK] Criado: /app/iot/logs/sensores
+[2026-06-04 13:48:42] [OK] Criado: /app/iot/backups
+[2026-06-04 13:48:42] [OK] Criado: /app/iot/publicacao
+[2026-06-04 13:48:42] [OK] Criado: /var/log/iot
+[2026-06-04 13:48:42] Criando arquivos iniciais do sistema IoT...
+[2026-06-04 13:48:42] [OK] Arquivo sensores.conf criado.
+[2026-06-04 13:48:42] [OK] Arquivo coletas.log criado.
+[2026-06-04 13:48:42] [OK] Arquivo alertas_ativos.txt criado.
+[2026-06-04 13:48:42] Estrutura de diretórios criada:
+[2026-06-04 13:48:42] ====== ESTRUTURA IoT CRIADA COM SUCESSO ======
+[2026-06-04 14:07:02] Limpando estruturas temporárias antigas...
+[2026-06-04 14:07:02] [OK] Removido: /app/iot/alertas/resolvidos
+[2026-06-04 14:07:02] ====== CRIANDO ESTRUTURA DE DIRETÓRIOS - IoT Monitor ======
+[2026-06-04 14:07:02] [OK] Criado: /app/iot/sensores/temperatura
+[2026-06-04 14:07:02] [OK] Criado: /app/iot/sensores/umidade
+[2026-06-04 14:07:02] [OK] Criado: /app/iot/sensores/pressao
+[2026-06-04 14:07:02] [OK] Criado: /app/iot/sensores/co2
+[2026-06-04 14:07:02] [OK] Criado: /app/iot/coletas/historico
+[2026-06-04 14:07:02] [OK] Criado: /app/iot/coletas/tempo_real
+[2026-06-04 14:07:02] [OK] Criado: /app/iot/alertas/criticos
+[2026-06-04 14:07:02] [OK] Criado: /app/iot/alertas/avisos
+[2026-06-04 14:07:02] [OK] Criado: /app/iot/alertas/resolvidos
+[2026-06-04 14:07:02] [OK] Criado: /app/iot/logs/sistema
+[2026-06-04 14:07:02] [OK] Criado: /app/iot/logs/sensores
+[2026-06-04 14:07:02] [OK] Criado: /app/iot/backups
+[2026-06-04 14:07:02] [OK] Criado: /app/iot/publicacao
+[2026-06-04 14:07:02] [OK] Criado: /var/log/iot
+[2026-06-04 14:07:02] Criando arquivos iniciais do sistema IoT...
+[2026-06-04 14:07:02] [OK] Arquivo sensores.conf criado.
+[2026-06-04 14:07:02] [OK] Arquivo coletas.log criado.
+[2026-06-04 14:07:02] [OK] Arquivo alertas_ativos.txt criado.
+[2026-06-04 14:07:02] Estrutura de diretórios criada:
+[2026-06-04 14:07:02] ====== ESTRUTURA IoT CRIADA COM SUCESSO ======

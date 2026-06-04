@@ -1,0 +1,10 @@
+[2026-06-04 13:50:00] [OK] Arquivos fonte validados em: /app/source
+[2026-06-04 13:50:00] Limpando diretório de destino: /var/www/html
+[2026-06-04 13:50:00] [OK] Destino limpo.
+[2026-06-04 13:50:00] ====== INICIANDO DEPLOY - IoT Monitor Dashboard ======
+[2026-06-04 13:50:00] Copiando de /app/source para /var/www/html...
+[2026-06-04 13:50:00] [OK] Arquivos copiados com sucesso.
+[2026-06-04 13:50:00] [OK] Permissões ajustadas (644 para arquivos, 755 para diretórios).
+[2026-06-04 13:50:00] [OK] Deploy validado. index.html presente em /var/www/html
+[2026-06-04 13:50:00] Arquivos publicados: assets index.html server.js sobre.html 
+[2026-06-04 13:50:00] ====== DEPLOY CONCLUÍDO ======

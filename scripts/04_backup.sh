@@ -1,3 +1,5 @@
+#!/bin/bash
+
 ORIGEM="/app/iot"
 DESTINO="/app/iot/backups"
 LOG_DIR="/app/iot/logs"

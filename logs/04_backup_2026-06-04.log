@@ -1,0 +1,7 @@
+[2026-06-04 13:49:38] [OK] Origem validada: /app/iot
+[2026-06-04 13:49:38] ====== INICIANDO BACKUP - IoT Monitor ======
+[2026-06-04 13:49:38] Origem:  /app/iot
+[2026-06-04 13:49:38] Destino: /app/iot/backups/backup_iot_monitor_2026-06-04_13-49.tar.gz
+[2026-06-04 13:49:38] [OK] Backup criado com sucesso: backup_iot_monitor_2026-06-04_13-49.tar.gz
+[2026-06-04 13:49:38] [OK] Backup validado. Arquivo: backup_iot_monitor_2026-06-04_13-49.tar.gz | Tamanho: 4.0K
+[2026-06-04 13:49:38] ====== BACKUP CONCLUÍDO ======

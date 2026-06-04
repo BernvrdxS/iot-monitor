@@ -1,3 +1,5 @@
+#!/bin/bash
+
 LOG_DIR="/app/iot/logs"
 LOG_FILE="$LOG_DIR/06_processos_$(date +%Y-%m-%d).log"
 
