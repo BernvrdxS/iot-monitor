@@ -1,58 +1,26 @@
 version: '3.9'
 
-
 services:
-
-  # ── Banco de Dados ─────────────────────────────────────────
-  db:
-    image: postgres:15-alpine
-    container_name: iot_db
-    restart: unless-stopped
-    environment:
-      POSTGRES_DB: ${DB_NAME:-iot_monitor}
-      POSTGRES_USER: ${DB_USER:-postgres}
-      POSTGRES_PASSWORD: ${DB_PASSWORD:-postgres}
-    volumes:
-      - pgdata:/var/lib/postgresql/data   # Persistência dos dados
-    networks:
-      - iot_network
-    healthcheck:
-      test: ["CMD-SHELL", "pg_isready -U ${DB_USER:-postgres} -d ${DB_NAME:-iot_monitor}"]
-      interval: 10s
-      timeout: 5s
-      retries: 5
-
-  # ── Aplicação ──────────────────────────────────────────────
-  app:
+  linux:
     build:
-      context: ./app
+      context: .
       dockerfile: Dockerfile
-    container_name: iot_app
+    container_name: trabalho03-linux
     restart: unless-stopped
     ports:
-      - "${APP_PORT:-3000}:3000"          # Acesso externo na porta 3000
-    environment:
-      PORT: 3000
-      DB_HOST: db                         # Nome do serviço no Docker Compose
-      DB_PORT: 5432
-      DB_NAME: ${DB_NAME:-iot_monitor}
-      DB_USER: ${DB_USER:-postgres}
-      DB_PASSWORD: ${DB_PASSWORD:-postgres}
-      NODE_ENV: production
-    depends_on:
-      db:
-        condition: service_healthy        # Aguarda o banco estar pronto
-    networks:
-      - iot_network
+      - "8080:80"           # Apache acessível em http://localhost:8080
+    volumes:
+      - ./scripts:/app/scripts          # Scripts sincronizados com o host
+      - ./source:/app/source            # Fonte dos arquivos estáticos
+      - ./logs:/app/iot/logs            # Logs persistidos no host
+      - ./backups:/app/iot/backups      # Backups persistidos no host
+      - ./evidencias:/app/evidencias    # Evidências persistidas no host
+      - iot_data:/app/iot               # Volume nomeado para dados do IoT
+    tty: true
+    stdin_open: true
 
 # ── Volumes ────────────────────────────────────────────────────
 volumes:
-  pgdata:
+  iot_data:
     driver: local
-    name: iot_pgdata
-
-# ── Redes ──────────────────────────────────────────────────────
-networks:
-  iot_network:
-    driver: bridge
-    name: iot_network
+    name: iot_trabalho03_data
