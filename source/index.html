@@ -6,274 +6,475 @@
   <meta name="description" content="Painel de Monitoramento de Dispositivos IoT para gerenciamento e visualização de sensores em tempo real">
   <meta name="keywords" content="IoT, monitoramento, sensores, dashboard, dispositivos, cloud computing">
   <meta name="author" content="IoT Monitor Team">
-  <meta name="theme-color" content="#1f2937">
-  <title>IoT Monitor - Dashboard</title>
+  <meta name="theme-color" content="#0a0e1a">
+  <title>IoT Monitor — Dashboard</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
 
   <style>
-    *,
-    *::before,
-    *::after {
-      box-sizing: border-box;
-    }
+    *, *::before, *::after { box-sizing: border-box; }
 
     :root {
-      --color-primary: #1f2937;
-      --color-primary-light: #374151;
-      --color-background: #f4f6f9;
-      --color-card: #ffffff;
-      --color-text: #1f2937;
-      --color-text-muted: #6b7280;
-      --color-success: #059669;
-      --color-link: #2563eb;
-      --color-link-hover: #1d4ed8;
-      --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.05);
-      --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -2px rgba(0, 0, 0, 0.1);
-      --radius: 12px;
-      --transition: 0.2s ease;
+      --bg:        #0a0e1a;
+      --bg-card:   #111827;
+      --bg-card2:  #0f172a;
+      --border:    rgba(56, 189, 248, 0.12);
+      --border-hi: rgba(56, 189, 248, 0.4);
+      --cyan:      #38bdf8;
+      --cyan-dim:  rgba(56, 189, 248, 0.15);
+      --green:     #34d399;
+      --green-dim: rgba(52, 211, 153, 0.15);
+      --amber:     #fbbf24;
+      --text:      #e2e8f0;
+      --text-muted:#64748b;
+      --mono:      'Space Mono', monospace;
+      --sans:      'DM Sans', sans-serif;
     }
 
     body {
-      font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
-      background-color: var(--color-background);
-      color: var(--color-text);
+      font-family: var(--sans);
+      background-color: var(--bg);
+      color: var(--text);
       margin: 0;
-      padding: 0;
-      line-height: 1.6;
       min-height: 100vh;
       display: flex;
       flex-direction: column;
+      /* subtle grid texture */
+      background-image:
+        linear-gradient(rgba(56,189,248,0.03) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(56,189,248,0.03) 1px, transparent 1px);
+      background-size: 40px 40px;
     }
 
+    /* ── HEADER ─────────────────────────────────── */
     header {
-      background-color: var(--color-primary);
-      color: #fff;
-      text-align: center;
-      padding: 2rem 1rem;
+      border-bottom: 1px solid var(--border);
+      padding: 0 2rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      height: 64px;
+      position: sticky;
+      top: 0;
+      z-index: 10;
+      background: rgba(10, 14, 26, 0.85);
+      backdrop-filter: blur(12px);
     }
 
-    header h1 {
-      margin: 0 0 0.5rem;
-      font-size: clamp(1.75rem, 5vw, 2.5rem);
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+    }
+
+    .logo-icon {
+      width: 32px;
+      height: 32px;
+      background: var(--cyan-dim);
+      border: 1px solid var(--border-hi);
+      border-radius: 6px;
+      display: grid;
+      place-items: center;
+    }
+
+    .logo-icon svg { width: 18px; height: 18px; color: var(--cyan); }
+
+    .logo-text {
+      font-family: var(--mono);
+      font-size: 1rem;
       font-weight: 700;
-      letter-spacing: -0.025em;
+      color: var(--text);
+      letter-spacing: 0.05em;
     }
 
-    header p {
-      margin: 0;
-      opacity: 0.9;
-      font-size: 1.125rem;
+    .logo-text span { color: var(--cyan); }
+
+    .header-meta {
+      font-family: var(--mono);
+      font-size: 0.7rem;
+      color: var(--text-muted);
+      text-align: right;
+      line-height: 1.5;
     }
 
+    .header-meta .live {
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      color: var(--green);
+    }
+
+    .dot {
+      width: 6px; height: 6px;
+      background: var(--green);
+      border-radius: 50%;
+      animation: blink 2s ease-in-out infinite;
+    }
+
+    @keyframes blink {
+      0%,100% { opacity:1; } 50% { opacity:0.3; }
+    }
+
+    /* ── MAIN ────────────────────────────────────── */
     main {
       flex: 1;
-      width: min(90%, 1200px);
-      margin: 2rem auto;
-      padding: 0 1rem;
+      width: min(100%, 1280px);
+      margin: 0 auto;
+      padding: 2.5rem 2rem 4rem;
     }
 
+    .section-label {
+      font-family: var(--mono);
+      font-size: 0.65rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--text-muted);
+      margin-bottom: 1.25rem;
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+    }
+
+    .section-label::after {
+      content: '';
+      flex: 1;
+      height: 1px;
+      background: var(--border);
+    }
+
+    /* ── STAT CARDS ─────────────────────────────── */
     .cards {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-      gap: 1.25rem;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 1rem;
+      margin-bottom: 2.5rem;
     }
 
     .card {
-      background: var(--color-card);
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 10px;
       padding: 1.5rem;
-      border-radius: var(--radius);
-      box-shadow: var(--shadow-md);
-      transition: transform var(--transition), box-shadow var(--transition);
+      position: relative;
+      overflow: hidden;
+      transition: border-color 0.2s, transform 0.2s;
+      animation: fadeUp 0.5s ease both;
     }
 
-    .card:hover {
-      transform: translateY(-2px);
-      box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -4px rgba(0, 0, 0, 0.1);
+    .card:nth-child(1) { animation-delay: 0.05s; }
+    .card:nth-child(2) { animation-delay: 0.10s; }
+    .card:nth-child(3) { animation-delay: 0.15s; }
+    .card:nth-child(4) { animation-delay: 0.20s; }
+
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(16px); }
+      to   { opacity: 1; transform: translateY(0); }
     }
 
-    .card h2 {
-      margin: 0 0 0.75rem;
-      font-size: 1.125rem;
-      font-weight: 600;
-      color: var(--color-primary);
-      display: flex;
-      align-items: center;
-      gap: 0.5rem;
+    .card::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 2px;
+      background: linear-gradient(90deg, transparent, var(--cyan), transparent);
+      opacity: 0;
+      transition: opacity 0.3s;
     }
 
-    .card h2 svg {
-      width: 1.25rem;
-      height: 1.25rem;
-      flex-shrink: 0;
+    .card:hover { border-color: var(--border-hi); transform: translateY(-2px); }
+    .card:hover::before { opacity: 1; }
+
+    .card-icon {
+      width: 36px; height: 36px;
+      background: var(--cyan-dim);
+      border: 1px solid var(--border-hi);
+      border-radius: 8px;
+      display: grid;
+      place-items: center;
+      margin-bottom: 1rem;
     }
 
-    .card p {
-      margin: 0;
-      color: var(--color-text-muted);
+    .card-icon svg { width: 18px; height: 18px; color: var(--cyan); }
+    .card-icon.green { background: var(--green-dim); border-color: rgba(52,211,153,0.35); }
+    .card-icon.green svg { color: var(--green); }
+
+    .card-label {
+      font-family: var(--mono);
+      font-size: 0.65rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--text-muted);
+      margin-bottom: 0.5rem;
     }
 
     .card-value {
-      font-size: 1.5rem;
+      font-family: var(--mono);
+      font-size: 2rem;
       font-weight: 700;
-      color: var(--color-text);
-      margin-bottom: 0.25rem;
+      color: var(--text);
+      line-height: 1;
+      margin-bottom: 0.35rem;
     }
 
-    .card-label {
-      font-size: 0.875rem;
+    .card-sub {
+      font-size: 0.78rem;
+      color: var(--text-muted);
     }
 
-    .status {
+    .badge {
       display: inline-flex;
       align-items: center;
-      gap: 0.5rem;
-      color: var(--color-success);
-      font-weight: 600;
+      gap: 0.4rem;
+      font-family: var(--mono);
+      font-size: 0.75rem;
+      font-weight: 700;
+      padding: 0.3rem 0.75rem;
+      border-radius: 100px;
     }
 
-    .status::before {
-      content: '';
-      width: 8px;
-      height: 8px;
-      background-color: currentColor;
-      border-radius: 50%;
-      animation: pulse 2s infinite;
+    .badge-green {
+      background: var(--green-dim);
+      color: var(--green);
+      border: 1px solid rgba(52,211,153,0.3);
     }
 
-    @keyframes pulse {
-      0%, 100% { opacity: 1; }
-      50% { opacity: 0.5; }
-    }
+    /* ── ABOUT CARD ─────────────────────────────── */
+    .about-section { animation: fadeUp 0.5s 0.3s ease both; }
 
     .about-card {
-      margin-top: 1.5rem;
-      grid-column: 1 / -1;
+      background: var(--bg-card2);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 2rem 2.5rem;
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: 2rem;
+      align-items: start;
+    }
+
+    .about-card h2 {
+      font-family: var(--mono);
+      font-size: 0.9rem;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      color: var(--cyan);
+      margin: 0 0 1rem;
+      text-transform: uppercase;
     }
 
     .about-card p {
-      margin: 0 0 1rem;
+      font-size: 0.9rem;
+      color: var(--text-muted);
+      line-height: 1.7;
+      margin: 0 0 0.75rem;
     }
 
-    .about-card p:last-child {
-      margin-bottom: 0;
+    .about-card p:last-of-type { margin-bottom: 0; }
+
+    .tech-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+      margin-top: 1.25rem;
     }
 
-    a {
-      color: var(--color-link);
+    .tag {
+      font-family: var(--mono);
+      font-size: 0.65rem;
+      letter-spacing: 0.08em;
+      padding: 0.25rem 0.6rem;
+      border-radius: 4px;
+      background: var(--cyan-dim);
+      border: 1px solid var(--border-hi);
+      color: var(--cyan);
+    }
+
+    .about-cta {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      font-family: var(--mono);
+      font-size: 0.78rem;
+      font-weight: 700;
+      letter-spacing: 0.05em;
+      color: var(--bg);
+      background: var(--cyan);
+      border: none;
+      border-radius: 6px;
+      padding: 0.6rem 1.25rem;
       text-decoration: none;
-      font-weight: 500;
-      transition: color var(--transition);
+      transition: opacity 0.2s, transform 0.2s;
+      white-space: nowrap;
+      align-self: flex-start;
     }
 
-    a:hover,
-    a:focus {
-      color: var(--color-link-hover);
-      text-decoration: underline;
-    }
+    .about-cta:hover { opacity: 0.85; transform: translateY(-1px); text-decoration: none; color: var(--bg); }
 
-    a:focus-visible {
-      outline: 2px solid var(--color-link);
-      outline-offset: 2px;
-      border-radius: 2px;
-    }
+    .about-cta svg { width: 14px; height: 14px; }
 
+    /* ── FOOTER ─────────────────────────────────── */
     footer {
-      text-align: center;
-      padding: 1.5rem;
-      background-color: var(--color-primary);
-      color: #fff;
-      font-size: 0.875rem;
+      border-top: 1px solid var(--border);
+      padding: 1.25rem 2rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
     }
 
-    @media (max-width: 480px) {
-      header {
-        padding: 1.5rem 1rem;
-      }
+    .footer-brand {
+      font-family: var(--mono);
+      font-size: 0.7rem;
+      color: var(--text-muted);
+    }
 
-      main {
-        margin: 1.5rem auto;
-      }
+    .footer-brand span { color: var(--cyan); }
 
-      .card {
-        padding: 1.25rem;
-      }
+    .footer-right {
+      font-family: var(--mono);
+      font-size: 0.65rem;
+      color: var(--text-muted);
+    }
+
+    /* ── RESPONSIVE ─────────────────────────────── */
+    @media (max-width: 640px) {
+      header { padding: 0 1rem; }
+      main { padding: 1.5rem 1rem 3rem; }
+      .about-card { grid-template-columns: 1fr; }
+      .header-meta { display: none; }
     }
   </style>
 </head>
 <body>
 
 <header>
-  <h1>IoT Monitor</h1>
-  <p>Painel de Monitoramento de Dispositivos IoT</p>
+  <div class="logo">
+    <div class="logo-icon">
+      <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor">
+        <path stroke-linecap="round" stroke-linejoin="round" d="M9.348 14.652a3.75 3.75 0 0 1 0-5.304m5.304 0a3.75 3.75 0 0 1 0 5.304m-7.425 2.121a6.75 6.75 0 0 1 0-9.546m9.546 0a6.75 6.75 0 0 1 0 9.546M12 12h.008v.008H12V12Zm.375 0a.375.375 0 1 1-.75 0 .375.375 0 0 1 .75 0Z"/>
+      </svg>
+    </div>
+    <span class="logo-text">IoT<span>_</span>Monitor</span>
+  </div>
+  <div class="header-meta">
+    <div class="live"><span class="dot"></span>SISTEMA AO VIVO</div>
+    <div id="clock">--:--:--</div>
+  </div>
 </header>
 
 <main>
-  <section class="cards" aria-label="Estatisticas do sistema">
+
+  <p class="section-label">Visão Geral</p>
+
+  <section class="cards" aria-label="Estatísticas do sistema">
 
     <article class="card">
-      <h2>
-        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" aria-hidden="true">
-          <path stroke-linecap="round" stroke-linejoin="round" d="M9.348 14.652a3.75 3.75 0 0 1 0-5.304m5.304 0a3.75 3.75 0 0 1 0 5.304m-7.425 2.121a6.75 6.75 0 0 1 0-9.546m9.546 0a6.75 6.75 0 0 1 0 9.546M5.106 18.894c-3.808-3.807-3.808-9.98 0-13.788m13.788 0c3.808 3.807 3.808 9.98 0 13.788M12 12h.008v.008H12V12Zm.375 0a.375.375 0 1 1-.75 0 .375.375 0 0 1 .75 0Z"/>
+      <div class="card-icon">
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M9.348 14.652a3.75 3.75 0 0 1 0-5.304m5.304 0a3.75 3.75 0 0 1 0 5.304m-7.425 2.121a6.75 6.75 0 0 1 0-9.546m9.546 0a6.75 6.75 0 0 1 0 9.546M12 12h.008v.008H12V12Z"/>
         </svg>
-        Sensores Ativos
-      </h2>
-      <p class="card-value">12</p>
-      <p class="card-label">dispositivos monitorados</p>
+      </div>
+      <div class="card-label">Sensores Ativos</div>
+      <div class="card-value" id="sensor-count">12</div>
+      <div class="card-sub">dispositivos monitorados</div>
     </article>
 
     <article class="card">
-      <h2>
-        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" aria-hidden="true">
-          <path stroke-linecap="round" stroke-linejoin="round" d="M20.25 6.375c0 2.278-3.694 4.125-8.25 4.125S3.75 8.653 3.75 6.375m16.5 0c0-2.278-3.694-4.125-8.25-4.125S3.75 4.097 3.75 6.375m16.5 0v11.25c0 2.278-3.694 4.125-8.25 4.125s-8.25-1.847-8.25-4.125V6.375m16.5 0v3.75m-16.5-3.75v3.75m16.5 0v3.75C20.25 16.153 16.556 18 12 18s-8.25-1.847-8.25-4.125v-3.75m16.5 0c0 2.278-3.694 4.125-8.25 4.125s-8.25-1.847-8.25-4.125"/>
+      <div class="card-icon">
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M20.25 6.375c0 2.278-3.694 4.125-8.25 4.125S3.75 8.653 3.75 6.375m16.5 0c0-2.278-3.694-4.125-8.25-4.125S3.75 4.097 3.75 6.375m16.5 0v11.25c0 2.278-3.694 4.125-8.25 4.125s-8.25-1.847-8.25-4.125V6.375m16.5 0v3.75m-16.5-3.75v3.75m16.5 0v3.75C20.25 16.153 16.556 18 12 18s-8.25-1.847-8.25-4.125v-3.75"/>
         </svg>
-        Coletas Registradas
-      </h2>
-      <p class="card-value">2.548</p>
-      <p class="card-label">registros processados</p>
+      </div>
+      <div class="card-label">Coletas Registradas</div>
+      <div class="card-value" id="collect-count">2.548</div>
+      <div class="card-sub">registros processados</div>
     </article>
 
     <article class="card">
-      <h2>
-        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" aria-hidden="true">
+      <div class="card-icon green">
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor">
           <path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75 11.25 15 15 9.75M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z"/>
         </svg>
-        Status do Sistema
-      </h2>
-      <p class="status">Operacional</p>
+      </div>
+      <div class="card-label">Status do Sistema</div>
+      <div style="margin-top:0.5rem">
+        <span class="badge badge-green"><span class="dot" style="background:var(--green)"></span>Operacional</span>
+      </div>
+      <div class="card-sub" style="margin-top:0.5rem">todos os serviços ativos</div>
     </article>
 
     <article class="card">
-      <h2>
-        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" aria-hidden="true">
-          <path stroke-linecap="round" stroke-linejoin="round" d="M5.25 14.25h13.5m-13.5 0a3 3 0 0 1-3-3m3 3a3 3 0 1 0 0 6h13.5a3 3 0 1 0 0-6m-16.5-3a3 3 0 0 1 3-3h13.5a3 3 0 0 1 3 3m-19.5 0a4.5 4.5 0 0 1 .9-2.7L5.737 5.1a3.375 3.375 0 0 1 2.7-1.35h7.126c1.062 0 2.062.5 2.7 1.35l2.587 3.45a4.5 4.5 0 0 1 .9 2.7m0 0a3 3 0 0 1-3 3m0 3h.008v.008h-.008v-.008Zm0-6h.008v.008h-.008v-.008Zm-3 6h.008v.008h-.008v-.008Zm0-6h.008v.008h-.008v-.008Z"/>
+      <div class="card-icon green">
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M5.25 14.25h13.5m-13.5 0a3 3 0 0 1-3-3m3 3a3 3 0 1 0 0 6h13.5a3 3 0 1 0 0-6m-16.5-3a3 3 0 0 1 3-3h13.5a3 3 0 0 1 3 3m-19.5 0a4.5 4.5 0 0 1 .9-2.7L5.737 5.1a3.375 3.375 0 0 1 2.7-1.35h7.126c1.062 0 2.062.5 2.7 1.35l2.587 3.45a4.5 4.5 0 0 1 .9 2.7"/>
         </svg>
-        Servidor Apache
-      </h2>
-      <p class="status">Em execucao</p>
+      </div>
+      <div class="card-label">Servidor Apache</div>
+      <div style="margin-top:0.5rem">
+        <span class="badge badge-green"><span class="dot" style="background:var(--green)"></span>Em execução</span>
+      </div>
+      <div class="card-sub" style="margin-top:0.5rem">uptime estável</div>
     </article>
 
   </section>
 
-  <article class="card about-card">
-    <h2>
-      <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" aria-hidden="true">
-        <path stroke-linecap="round" stroke-linejoin="round" d="m11.25 11.25.041-.02a.75.75 0 0 1 1.063.852l-.708 2.836a.75.75 0 0 0 1.063.853l.041-.021M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Zm-9-3.75h.008v.008H12V8.25Z"/>
-      </svg>
-      Sobre o Projeto
-    </h2>
-    <p>
-      Projeto desenvolvido para a disciplina de Cloud Computing,
-      utilizando Docker, Linux, Apache e Shell Script para
-      gerenciamento e monitoramento de um ambiente IoT.
-    </p>
-    <p>
-      <a href="sobre.html">Saiba mais sobre o projeto</a>
-    </p>
-  </article>
+  <p class="section-label">Informações do Projeto</p>
+
+  <div class="about-section">
+    <div class="about-card">
+      <div>
+        <h2>Sobre o Projeto</h2>
+        <p>
+          Desenvolvido para a disciplina de Cloud Computing, o IoT Monitor integra Docker, Linux,
+          Apache e Shell Script para gerenciamento e monitoramento de um ambiente IoT completo.
+        </p>
+        <p>
+          O sistema realiza coleta contínua de dados dos sensores, exibe métricas em tempo real
+          e oferece uma camada de administração automatizada via scripts de shell.
+        </p>
+        <div class="tech-tags">
+          <span class="tag">Docker</span>
+          <span class="tag">Linux</span>
+          <span class="tag">Apache</span>
+          <span class="tag">Shell Script</span>
+          <span class="tag">Cloud Computing</span>
+          <span class="tag">IoT</span>
+        </div>
+      </div>
+      <a href="sobre.html" class="about-cta">
+        Saiba mais
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2.5" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5 21 12m0 0-7.5 7.5M21 12H3"/>
+        </svg>
+      </a>
+    </div>
+  </div>
+
 </main>
 
 <footer>
-  <p>IoT Monitor &copy; 2026</p>
+  <span class="footer-brand">IoT<span>_</span>Monitor &copy; 2026</span>
+  <span class="footer-right">Cloud Computing · v1.0.0</span>
 </footer>
+
+<script>
+  // Live clock
+  function tick() {
+    const now = new Date();
+    document.getElementById('clock').textContent =
+      now.toLocaleTimeString('pt-BR', { hour12: false });
+  }
+  tick();
+  setInterval(tick, 1000);
+
+  // Simulate incrementing collect count
+  let count = 2548;
+  setInterval(() => {
+    count += Math.floor(Math.random() * 3);
+    document.getElementById('collect-count').textContent =
+      count.toLocaleString('pt-BR');
+  }, 4000);
+</script>
 
 </body>
 </html>
