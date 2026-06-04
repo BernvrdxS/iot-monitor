@@ -42,9 +42,9 @@ O site estático servido pelo Apache exibe o dashboard do IoT Monitor — interf
 │                                          │
 │  Apache :80 ──► http://localhost:8080    │
 │                                          │
-│  /app/scripts/    ← scripts Shell        │
-│  /app/source/     ← arquivos estáticos   │
-│  /app/iot/        ← dados do IoT         │
+│  /scripts/    ← scripts Shell            │
+│  /source/     ← arquivos estáticos       │
+│  /iot/        ← dados do IoT             │
 │    ├── sensores/                         │
 │    ├── coletas/                          │
 │    ├── alertas/                          │
@@ -54,12 +54,12 @@ O site estático servido pelo Apache exibe o dashboard do IoT Monitor — interf
 └──────────────────────────────────────────┘
          │                    │
    Volume iot_data       Volumes locais
-   (dados /app/iot)      logs/ backups/
+   (dados /iot)          logs/ backups/
                          scripts/ source/
 ```
 
 - O container **trabalho03-linux** executa Ubuntu com Apache
-- Os scripts Shell estão em `/app/scripts/` dentro do container
+- Os scripts Shell estão em `/scripts/` dentro do container
 - O Apache serve os arquivos de `/var/www/html/`
 - Logs e backups são persistidos via volumes mapeados para o host
 
