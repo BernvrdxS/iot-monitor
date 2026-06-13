@@ -26,6 +26,10 @@ monitorar_sistema() {
         echo "[ALERTA] Uso de disco acima de 80%" | tee -a $LOG_FILE
     fi
 
+    if [ "${CPU%.*}" -gt 80 ]; then
+        echo "[ALERTA] Uso de CPU acima de 80%" | tee -a $LOG_FILE
+    fi
+
     if pgrep apache2 > /dev/null; then
         echo "[OK] Apache em execução" | tee -a $LOG_FILE
     else
