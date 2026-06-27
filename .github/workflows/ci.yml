@@ -1,0 +1,58 @@
+name: CI - Testes e Lint da IoT Monitor API
+
+# Dispara o workflow em todo push e pull request direcionados à branch main.
+# Isso reproduz o fluxo de Integração Contínua: cada alteração de código é
+# validada automaticamente antes de ser considerada "segura" para a main.
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  build-and-test:
+    name: Build, Lint e Testes
+    runs-on: ubuntu-latest
+
+    steps:
+      # 1) Checkout: traz o código do repositório para o ambiente do runner.
+      #    Sem essa etapa, o runner não teria acesso a nenhum arquivo do projeto.
+      - name: Checkout do código
+        uses: actions/checkout@v4
+
+      # 2) Configura o ambiente Node.js na versão usada no desenvolvimento,
+      #    e habilita cache de dependências do npm para acelerar execuções futuras.
+      - name: Configurar Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+          cache-dependency-path: api/package-lock.json
+
+      # 3) Instala as dependências de forma determinística (respeita
+      #    exatamente as versões travadas no package-lock.json).
+      - name: Instalar dependências
+        working-directory: ./api
+        run: npm ci
+
+      # 4) Etapa adicional exigida pelo trabalho (além dos testes):
+      #    análise estática de código (lint) com ESLint, para detectar
+      #    problemas de sintaxe e padronização antes mesmo de rodar os testes.
+      - name: Executar lint (ESLint)
+        working-directory: ./api
+        run: npm run lint
+
+      # 5) Executa os testes unitários (Jest) com geração de relatório de
+      #    cobertura de código, falhando o pipeline caso algum teste quebre.
+      - name: Executar testes unitários (Jest)
+        working-directory: ./api
+        run: npm test
+
+      # 6) Publica o relatório de cobertura como artefato do workflow, para
+      #    que possa ser baixado e inspecionado a partir da interface do
+      #    GitHub Actions (aba "Summary" da execução).
+      - name: Publicar relatório de cobertura
+        uses: actions/upload-artifact@v4
+        with:
+          name: relatorio-cobertura
+          path: api/coverage/
