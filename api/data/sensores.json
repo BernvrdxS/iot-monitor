@@ -1,0 +1,134 @@
+[
+  {
+    "id": 1,
+    "nome": "Sensor de Temperatura - Galpão A",
+    "tipo": "temperatura",
+    "localizacao": "Galpão A - Setor 1",
+    "unidadeMedida": "°C",
+    "ultimaLeitura": 23.4,
+    "status": "ativo",
+    "bateria": 92,
+    "dataInstalacao": "2025-02-10"
+  },
+  {
+    "id": 2,
+    "nome": "Sensor de Umidade - Galpão A",
+    "tipo": "umidade",
+    "localizacao": "Galpão A - Setor 1",
+    "unidadeMedida": "%",
+    "ultimaLeitura": 58.7,
+    "status": "ativo",
+    "bateria": 88,
+    "dataInstalacao": "2025-02-10"
+  },
+  {
+    "id": 3,
+    "nome": "Sensor de Pressão Atmosférica - Cobertura",
+    "tipo": "pressao_atmosferica",
+    "localizacao": "Cobertura - Telhado Técnico",
+    "unidadeMedida": "hPa",
+    "ultimaLeitura": 1013.2,
+    "status": "ativo",
+    "bateria": 76,
+    "dataInstalacao": "2025-03-01"
+  },
+  {
+    "id": 4,
+    "nome": "Sensor de Luminosidade - Estoque",
+    "tipo": "luminosidade",
+    "localizacao": "Galpão B - Estoque",
+    "unidadeMedida": "lux",
+    "ultimaLeitura": 410,
+    "status": "ativo",
+    "bateria": 64,
+    "dataInstalacao": "2025-01-22"
+  },
+  {
+    "id": 5,
+    "nome": "Sensor de Movimento - Entrada Principal",
+    "tipo": "movimento",
+    "localizacao": "Portaria - Entrada Principal",
+    "unidadeMedida": "booleano",
+    "ultimaLeitura": 0,
+    "status": "ativo",
+    "bateria": 95,
+    "dataInstalacao": "2025-04-05"
+  },
+  {
+    "id": 6,
+    "nome": "Sensor de CO2 - Sala de Máquinas",
+    "tipo": "gas_co2",
+    "localizacao": "Galpão A - Sala de Máquinas",
+    "unidadeMedida": "ppm",
+    "ultimaLeitura": 612,
+    "status": "manutencao",
+    "bateria": 41,
+    "dataInstalacao": "2024-11-18"
+  },
+  {
+    "id": 7,
+    "nome": "Sensor de Nível de Água - Reservatório 1",
+    "tipo": "nivel_agua",
+    "localizacao": "Área Externa - Reservatório 1",
+    "unidadeMedida": "%",
+    "ultimaLeitura": 87,
+    "status": "ativo",
+    "bateria": 70,
+    "dataInstalacao": "2025-05-12"
+  },
+  {
+    "id": 8,
+    "nome": "Sensor de Ruído - Linha de Produção",
+    "tipo": "ruido",
+    "localizacao": "Galpão B - Linha de Produção",
+    "unidadeMedida": "dB",
+    "ultimaLeitura": 78.5,
+    "status": "ativo",
+    "bateria": 55,
+    "dataInstalacao": "2025-02-28"
+  },
+  {
+    "id": 9,
+    "nome": "Sensor de Qualidade do Ar - Escritório",
+    "tipo": "qualidade_ar",
+    "localizacao": "Bloco Administrativo - Escritório",
+    "unidadeMedida": "µg/m³",
+    "ultimaLeitura": 18.3,
+    "status": "ativo",
+    "bateria": 83,
+    "dataInstalacao": "2025-03-19"
+  },
+  {
+    "id": 10,
+    "nome": "Sensor de Vibração - Motor Compressor",
+    "tipo": "vibracao",
+    "localizacao": "Galpão A - Compressores",
+    "unidadeMedida": "mm/s",
+    "ultimaLeitura": 2.1,
+    "status": "inativo",
+    "bateria": 12,
+    "dataInstalacao": "2024-09-30"
+  },
+  {
+    "id": 11,
+    "nome": "Sensor de Fluxo de Água - Tubulação Principal",
+    "tipo": "fluxo_agua",
+    "localizacao": "Casa de Bombas",
+    "unidadeMedida": "L/min",
+    "ultimaLeitura": 134.6,
+    "status": "ativo",
+    "bateria": 67,
+    "dataInstalacao": "2025-01-09"
+  },
+  {
+    "id": 12,
+    "nome": "Sensor de Corrente Elétrica - Quadro Geral",
+    "tipo": "corrente_eletrica",
+    "localizacao": "Galpão A - Quadro de Energia",
+    "unidadeMedida": "A",
+    "ultimaLeitura": 14.8,
+    "status": "ativo",
+    "bateria": 99,
+    "dataInstalacao": "2025-05-30"
+  }
+]
